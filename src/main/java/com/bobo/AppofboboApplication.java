@@ -5,6 +5,7 @@ package com.bobo;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("com.bobo.dao")
 public class AppofboboApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppofboboApplication.class, args);

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bobo.dao.CommentsMapper" >
+  <resultMap id="BaseResultMap" type="com.bobo.pojo.Comments" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="dynamic_or_comment_id" property="dynamicOrCommentId" jdbcType="INTEGER" />
+    <result column="comment_publisher_name" property="commentPublisherName" jdbcType="VARCHAR" />
+    <result column="comment_publish_time" property="commentPublishTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="comment_pariser_number" property="commentPariserNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bobo.pojo.Comments" extends="BaseResultMap" >
+    <result column="comment_content" property="commentContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, status, dynamic_or_comment_id, comment_publisher_name, comment_publish_time, 
+    create_time, update_time, comment_pariser_number
+  </sql>
+  <sql id="Blob_Column_List" >
+    comment_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bobo_comments
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bobo_comments
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bobo.pojo.Comments" >
+    insert into bobo_comments (id, status, dynamic_or_comment_id, 
+      comment_publisher_name, comment_publish_time, 
+      create_time, update_time, comment_pariser_number, 
+      comment_content)
+    values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{dynamicOrCommentId,jdbcType=INTEGER}, 
+      #{commentPublisherName,jdbcType=VARCHAR}, #{commentPublishTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{commentPariserNumber,jdbcType=INTEGER}, 
+      #{commentContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bobo.pojo.Comments" >
+    insert into bobo_comments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="dynamicOrCommentId != null" >
+        dynamic_or_comment_id,
+      </if>
+      <if test="commentPublisherName != null" >
+        comment_publisher_name,
+      </if>
+      <if test="commentPublishTime != null" >
+        comment_publish_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="commentPariserNumber != null" >
+        comment_pariser_number,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicOrCommentId != null" >
+        #{dynamicOrCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="commentPublisherName != null" >
+        #{commentPublisherName,jdbcType=VARCHAR},
+      </if>
+      <if test="commentPublishTime != null" >
+        #{commentPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentPariserNumber != null" >
+        #{commentPariserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.Comments" >
+    update bobo_comments
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicOrCommentId != null" >
+        dynamic_or_comment_id = #{dynamicOrCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="commentPublisherName != null" >
+        comment_publisher_name = #{commentPublisherName,jdbcType=VARCHAR},
+      </if>
+      <if test="commentPublishTime != null" >
+        comment_publish_time = #{commentPublishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentPariserNumber != null" >
+        comment_pariser_number = #{commentPariserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bobo.pojo.Comments" >
+    update bobo_comments
+    set status = #{status,jdbcType=INTEGER},
+      dynamic_or_comment_id = #{dynamicOrCommentId,jdbcType=INTEGER},
+      comment_publisher_name = #{commentPublisherName,jdbcType=VARCHAR},
+      comment_publish_time = #{commentPublishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      comment_pariser_number = #{commentPariserNumber,jdbcType=INTEGER},
+      comment_content = #{commentContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.Comments" >
+    update bobo_comments
+    set status = #{status,jdbcType=INTEGER},
+      dynamic_or_comment_id = #{dynamicOrCommentId,jdbcType=INTEGER},
+      comment_publisher_name = #{commentPublisherName,jdbcType=VARCHAR},
+      comment_publish_time = #{commentPublishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      comment_pariser_number = #{commentPariserNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

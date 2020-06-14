@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bobo.dao.DynamicmentMapper" >
+  <resultMap id="BaseResultMap" type="com.bobo.pojo.Dynamicment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="publisher_bobo_number" property="publisherBoboNumber" jdbcType="VARCHAR" />
+    <result column="dynamicment_category" property="dynamicmentCategory" jdbcType="VARCHAR" />
+    <result column="publisher_port" property="publisherPort" jdbcType="VARCHAR" />
+    <result column="publisher_name" property="publisherName" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="dynamicment_pariser_number" property="dynamicmentPariserNumber" jdbcType="INTEGER" />
+    <result column="dynamic_comment_number" property="dynamicCommentNumber" jdbcType="INTEGER" />
+    <result column="dynamic_tranmit_number" property="dynamicTranmitNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bobo.pojo.Dynamicment" extends="BaseResultMap" >
+    <result column="dynamicment_content" property="dynamicmentContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, publisher_bobo_number, dynamicment_category, publisher_port, publisher_name, 
+    publish_time, create_time, update_time, dynamicment_pariser_number, dynamic_comment_number, 
+    dynamic_tranmit_number
+  </sql>
+  <sql id="Blob_Column_List" >
+    dynamicment_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bobo_dynamicment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bobo_dynamicment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bobo.pojo.Dynamicment" >
+    insert into bobo_dynamicment (id, publisher_bobo_number, dynamicment_category, 
+      publisher_port, publisher_name, publish_time, 
+      create_time, update_time, dynamicment_pariser_number, 
+      dynamic_comment_number, dynamic_tranmit_number, 
+      dynamicment_content)
+    values (#{id,jdbcType=INTEGER}, #{publisherBoboNumber,jdbcType=VARCHAR}, #{dynamicmentCategory,jdbcType=VARCHAR}, 
+      #{publisherPort,jdbcType=VARCHAR}, #{publisherName,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{dynamicmentPariserNumber,jdbcType=INTEGER}, 
+      #{dynamicCommentNumber,jdbcType=INTEGER}, #{dynamicTranmitNumber,jdbcType=INTEGER}, 
+      #{dynamicmentContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bobo.pojo.Dynamicment" >
+    insert into bobo_dynamicment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="publisherBoboNumber != null" >
+        publisher_bobo_number,
+      </if>
+      <if test="dynamicmentCategory != null" >
+        dynamicment_category,
+      </if>
+      <if test="publisherPort != null" >
+        publisher_port,
+      </if>
+      <if test="publisherName != null" >
+        publisher_name,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="dynamicmentPariserNumber != null" >
+        dynamicment_pariser_number,
+      </if>
+      <if test="dynamicCommentNumber != null" >
+        dynamic_comment_number,
+      </if>
+      <if test="dynamicTranmitNumber != null" >
+        dynamic_tranmit_number,
+      </if>
+      <if test="dynamicmentContent != null" >
+        dynamicment_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="publisherBoboNumber != null" >
+        #{publisherBoboNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicmentCategory != null" >
+        #{dynamicmentCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherPort != null" >
+        #{publisherPort,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherName != null" >
+        #{publisherName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dynamicmentPariserNumber != null" >
+        #{dynamicmentPariserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicCommentNumber != null" >
+        #{dynamicCommentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicTranmitNumber != null" >
+        #{dynamicTranmitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicmentContent != null" >
+        #{dynamicmentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.Dynamicment" >
+    update bobo_dynamicment
+    <set >
+      <if test="publisherBoboNumber != null" >
+        publisher_bobo_number = #{publisherBoboNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicmentCategory != null" >
+        dynamicment_category = #{dynamicmentCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherPort != null" >
+        publisher_port = #{publisherPort,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherName != null" >
+        publisher_name = #{publisherName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dynamicmentPariserNumber != null" >
+        dynamicment_pariser_number = #{dynamicmentPariserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicCommentNumber != null" >
+        dynamic_comment_number = #{dynamicCommentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicTranmitNumber != null" >
+        dynamic_tranmit_number = #{dynamicTranmitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicmentContent != null" >
+        dynamicment_content = #{dynamicmentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bobo.pojo.Dynamicment" >
+    update bobo_dynamicment
+    set publisher_bobo_number = #{publisherBoboNumber,jdbcType=VARCHAR},
+      dynamicment_category = #{dynamicmentCategory,jdbcType=VARCHAR},
+      publisher_port = #{publisherPort,jdbcType=VARCHAR},
+      publisher_name = #{publisherName,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      dynamicment_pariser_number = #{dynamicmentPariserNumber,jdbcType=INTEGER},
+      dynamic_comment_number = #{dynamicCommentNumber,jdbcType=INTEGER},
+      dynamic_tranmit_number = #{dynamicTranmitNumber,jdbcType=INTEGER},
+      dynamicment_content = #{dynamicmentContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.Dynamicment" >
+    update bobo_dynamicment
+    set publisher_bobo_number = #{publisherBoboNumber,jdbcType=VARCHAR},
+      dynamicment_category = #{dynamicmentCategory,jdbcType=VARCHAR},
+      publisher_port = #{publisherPort,jdbcType=VARCHAR},
+      publisher_name = #{publisherName,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      dynamicment_pariser_number = #{dynamicmentPariserNumber,jdbcType=INTEGER},
+      dynamic_comment_number = #{dynamicCommentNumber,jdbcType=INTEGER},
+      dynamic_tranmit_number = #{dynamicTranmitNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

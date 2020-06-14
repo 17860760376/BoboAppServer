@@ -70,5 +70,63 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
+        <table tableName="bobo_user_attention" domainObjectName="UserAttention"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="bobo_dynamicment_picture" domainObjectName="DynamicmentPicture"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+        ></table>
+        <table tableName="bobo_dynamicment" domainObjectName="Dynamicment"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="bobo_communitys" domainObjectName="Communitys"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="bobo_community_picture" domainObjectName="Community_picture"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+        ></table>
+        <table tableName="bobo_community_activitys" domainObjectName="CommunityActivitys"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="bobo_comments" domainObjectName="Comments"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="bobo_category" domainObjectName="Category"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"
+        ></table>
+        <table tableName="bobo_activity_picture" domainObjectName="ActivityPicture"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+
     </context>
 </generatorConfiguration>

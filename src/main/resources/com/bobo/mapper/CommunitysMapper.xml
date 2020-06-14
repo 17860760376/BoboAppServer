@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bobo.dao.CommunitysMapper" >
+  <resultMap id="BaseResultMap" type="com.bobo.pojo.Communitys" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="community_name" property="communityName" jdbcType="VARCHAR" />
+    <result column="community_creater" property="communityCreater" jdbcType="VARCHAR" />
+    <result column="community_symbol" property="communitySymbol" jdbcType="VARCHAR" />
+    <result column="community_heat" property="communityHeat" jdbcType="INTEGER" />
+    <result column="community_login_number" property="communityLoginNumber" jdbcType="INTEGER" />
+    <result column="community_member_number" property="communityMemberNumber" jdbcType="INTEGER" />
+    <result column="community_focuson_number" property="communityFocusonNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="community_activity_number" property="communityActivityNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bobo.pojo.Communitys" extends="BaseResultMap" >
+    <result column="community_introduction" property="communityIntroduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, community_name, community_creater, community_symbol, community_heat, community_login_number, 
+    community_member_number, community_focuson_number, create_time, update_time, community_activity_number
+  </sql>
+  <sql id="Blob_Column_List" >
+    community_introduction
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bobo_communitys
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bobo_communitys
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bobo.pojo.Communitys" >
+    insert into bobo_communitys (id, community_name, community_creater, 
+      community_symbol, community_heat, community_login_number, 
+      community_member_number, community_focuson_number, 
+      create_time, update_time, community_activity_number, 
+      community_introduction)
+    values (#{id,jdbcType=INTEGER}, #{communityName,jdbcType=VARCHAR}, #{communityCreater,jdbcType=VARCHAR}, 
+      #{communitySymbol,jdbcType=VARCHAR}, #{communityHeat,jdbcType=INTEGER}, #{communityLoginNumber,jdbcType=INTEGER}, 
+      #{communityMemberNumber,jdbcType=INTEGER}, #{communityFocusonNumber,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{communityActivityNumber,jdbcType=INTEGER}, 
+      #{communityIntroduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bobo.pojo.Communitys" >
+    insert into bobo_communitys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communityName != null" >
+        community_name,
+      </if>
+      <if test="communityCreater != null" >
+        community_creater,
+      </if>
+      <if test="communitySymbol != null" >
+        community_symbol,
+      </if>
+      <if test="communityHeat != null" >
+        community_heat,
+      </if>
+      <if test="communityLoginNumber != null" >
+        community_login_number,
+      </if>
+      <if test="communityMemberNumber != null" >
+        community_member_number,
+      </if>
+      <if test="communityFocusonNumber != null" >
+        community_focuson_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="communityActivityNumber != null" >
+        community_activity_number,
+      </if>
+      <if test="communityIntroduction != null" >
+        community_introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="communityName != null" >
+        #{communityName,jdbcType=VARCHAR},
+      </if>
+      <if test="communityCreater != null" >
+        #{communityCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="communitySymbol != null" >
+        #{communitySymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="communityHeat != null" >
+        #{communityHeat,jdbcType=INTEGER},
+      </if>
+      <if test="communityLoginNumber != null" >
+        #{communityLoginNumber,jdbcType=INTEGER},
+      </if>
+      <if test="communityMemberNumber != null" >
+        #{communityMemberNumber,jdbcType=INTEGER},
+      </if>
+      <if test="communityFocusonNumber != null" >
+        #{communityFocusonNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="communityActivityNumber != null" >
+        #{communityActivityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="communityIntroduction != null" >
+        #{communityIntroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.Communitys" >
+    update bobo_communitys
+    <set >
+      <if test="communityName != null" >
+        community_name = #{communityName,jdbcType=VARCHAR},
+      </if>
+      <if test="communityCreater != null" >
+        community_creater = #{communityCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="communitySymbol != null" >
+        community_symbol = #{communitySymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="communityHeat != null" >
+        community_heat = #{communityHeat,jdbcType=INTEGER},
+      </if>
+      <if test="communityLoginNumber != null" >
+        community_login_number = #{communityLoginNumber,jdbcType=INTEGER},
+      </if>
+      <if test="communityMemberNumber != null" >
+        community_member_number = #{communityMemberNumber,jdbcType=INTEGER},
+      </if>
+      <if test="communityFocusonNumber != null" >
+        community_focuson_number = #{communityFocusonNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="communityActivityNumber != null" >
+        community_activity_number = #{communityActivityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="communityIntroduction != null" >
+        community_introduction = #{communityIntroduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bobo.pojo.Communitys" >
+    update bobo_communitys
+    set community_name = #{communityName,jdbcType=VARCHAR},
+      community_creater = #{communityCreater,jdbcType=VARCHAR},
+      community_symbol = #{communitySymbol,jdbcType=VARCHAR},
+      community_heat = #{communityHeat,jdbcType=INTEGER},
+      community_login_number = #{communityLoginNumber,jdbcType=INTEGER},
+      community_member_number = #{communityMemberNumber,jdbcType=INTEGER},
+      community_focuson_number = #{communityFocusonNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      community_activity_number = #{communityActivityNumber,jdbcType=INTEGER},
+      community_introduction = #{communityIntroduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.Communitys" >
+    update bobo_communitys
+    set community_name = #{communityName,jdbcType=VARCHAR},
+      community_creater = #{communityCreater,jdbcType=VARCHAR},
+      community_symbol = #{communitySymbol,jdbcType=VARCHAR},
+      community_heat = #{communityHeat,jdbcType=INTEGER},
+      community_login_number = #{communityLoginNumber,jdbcType=INTEGER},
+      community_member_number = #{communityMemberNumber,jdbcType=INTEGER},
+      community_focuson_number = #{communityFocusonNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      community_activity_number = #{communityActivityNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

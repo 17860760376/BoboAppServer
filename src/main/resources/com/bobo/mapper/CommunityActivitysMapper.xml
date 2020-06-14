@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bobo.dao.CommunityActivitysMapper" >
+  <resultMap id="BaseResultMap" type="com.bobo.pojo.CommunityActivitys" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="community_id" property="communityId" jdbcType="INTEGER" />
+    <result column="activity_label" property="activityLabel" jdbcType="VARCHAR" />
+    <result column="activity_focuson_number" property="activityFocusonNumber" jdbcType="INTEGER" />
+    <result column="activity_heat" property="activityHeat" jdbcType="INTEGER" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="activity_time" property="activityTime" jdbcType="TIMESTAMP" />
+    <result column="activity_address" property="activityAddress" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bobo.pojo.CommunityActivitys" extends="BaseResultMap" >
+    <result column="activiti_content" property="activitiContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, community_id, activity_label, activity_focuson_number, activity_heat, activity_name, 
+    activity_time, activity_address, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    activiti_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bobo_community_activitys
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bobo_community_activitys
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bobo.pojo.CommunityActivitys" >
+    insert into bobo_community_activitys (id, community_id, activity_label, 
+      activity_focuson_number, activity_heat, activity_name, 
+      activity_time, activity_address, create_time, 
+      update_time, activiti_content)
+    values (#{id,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}, #{activityLabel,jdbcType=VARCHAR}, 
+      #{activityFocusonNumber,jdbcType=INTEGER}, #{activityHeat,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, 
+      #{activityTime,jdbcType=TIMESTAMP}, #{activityAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{activitiContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bobo.pojo.CommunityActivitys" >
+    insert into bobo_community_activitys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="communityId != null" >
+        community_id,
+      </if>
+      <if test="activityLabel != null" >
+        activity_label,
+      </if>
+      <if test="activityFocusonNumber != null" >
+        activity_focuson_number,
+      </if>
+      <if test="activityHeat != null" >
+        activity_heat,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="activityTime != null" >
+        activity_time,
+      </if>
+      <if test="activityAddress != null" >
+        activity_address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="activitiContent != null" >
+        activiti_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="communityId != null" >
+        #{communityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityLabel != null" >
+        #{activityLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="activityFocusonNumber != null" >
+        #{activityFocusonNumber,jdbcType=INTEGER},
+      </if>
+      <if test="activityHeat != null" >
+        #{activityHeat,jdbcType=INTEGER},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTime != null" >
+        #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityAddress != null" >
+        #{activityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activitiContent != null" >
+        #{activitiContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.CommunityActivitys" >
+    update bobo_community_activitys
+    <set >
+      <if test="communityId != null" >
+        community_id = #{communityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityLabel != null" >
+        activity_label = #{activityLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="activityFocusonNumber != null" >
+        activity_focuson_number = #{activityFocusonNumber,jdbcType=INTEGER},
+      </if>
+      <if test="activityHeat != null" >
+        activity_heat = #{activityHeat,jdbcType=INTEGER},
+      </if>
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTime != null" >
+        activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityAddress != null" >
+        activity_address = #{activityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activitiContent != null" >
+        activiti_content = #{activitiContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bobo.pojo.CommunityActivitys" >
+    update bobo_community_activitys
+    set community_id = #{communityId,jdbcType=INTEGER},
+      activity_label = #{activityLabel,jdbcType=VARCHAR},
+      activity_focuson_number = #{activityFocusonNumber,jdbcType=INTEGER},
+      activity_heat = #{activityHeat,jdbcType=INTEGER},
+      activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      activity_address = #{activityAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      activiti_content = #{activitiContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.CommunityActivitys" >
+    update bobo_community_activitys
+    set community_id = #{communityId,jdbcType=INTEGER},
+      activity_label = #{activityLabel,jdbcType=VARCHAR},
+      activity_focuson_number = #{activityFocusonNumber,jdbcType=INTEGER},
+      activity_heat = #{activityHeat,jdbcType=INTEGER},
+      activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      activity_address = #{activityAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
