@@ -1,4 +1,5 @@
 package com.bobo;
+        import com.bobo.utils.CreatePhoneCode;
         import org.apache.ibatis.annotations.Mapper;
         import org.mybatis.spring.annotation.MapperScan;
         import org.springframework.boot.SpringApplication;
@@ -10,5 +11,4 @@ public class AppofboboApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppofboboApplication.class, args);
     }
-
 }

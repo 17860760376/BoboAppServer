@@ -5,8 +5,9 @@ public enum ResponseCode {
     PASSWORD_NOT_EMPTY(2,"密码不能为空"),
     USERNAME_NOT_EXISTS(3,"用户名不存在"),
     PASSWORD_ERROR(4,"密码错误"),
-
-
+    USERANME_EXISTS(5,"用户已存在"),
+    PHONECODE_NOT_EMPTY(6,"验证码不能为空"),
+    PHONECODE_ERROR(7,"验证码错误"),
     ;
 
     private int code;
