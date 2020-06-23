@@ -1,17 +1,15 @@
 package com.bobo.service;
 
-import com.bobo.beans.UserAndPhoneCode;
 import com.bobo.utils.ServerResponse;
-import org.apache.catalina.Server;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 public interface IUserService {
     /**
      * 发送并获取手机号验证码
      *
      */
-    ServerResponse sendPhoneCode(String username,int status, HttpSession httpSession);
+    ServerResponse sendPhoneCode(HttpServletRequest request,String username, int status);
     /**
      * 用账号（手机号）和密码登陆
      */
@@ -19,9 +17,9 @@ public interface IUserService {
     /**
      * 用手机验证码登陆
      */
-    ServerResponse loginByPhoneCode(String username,String phonecode,HttpSession httpSession);
+    ServerResponse loginByPhoneCode(HttpServletRequest request,String username,String phonecode);
     /**
      * 注册
      */
-    ServerResponse registeredLogic(UserAndPhoneCode userAndPhoneCode);
+    ServerResponse registeredLogic(HttpServletRequest request,String username,String phonecode,String password,String _password);
 }

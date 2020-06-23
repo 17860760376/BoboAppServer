@@ -55,8 +55,8 @@
       #{boboUserProvince,jdbcType=VARCHAR}, #{boboUserCity,jdbcType=VARCHAR}, #{boboUserAddreee,jdbcType=VARCHAR}, 
       #{boboUserAddress,jdbcType=VARCHAR}, #{boboPraiseNumber,jdbcType=INTEGER}, #{boboFansNumbers,jdbcType=INTEGER}, 
       #{boboFrientsNumbers,jdbcType=INTEGER}, #{boboFocusonNumbers,jdbcType=INTEGER}, 
-      #{boboCommunity,jdbcType=VARCHAR}, #{boboCommunityPosition,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{boboCommunity,jdbcType=VARCHAR}, #{boboCommunityPosition,jdbcType=INTEGER}, now(),
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.bobo.pojo.UserInformation" >
     insert into bobo_user_information

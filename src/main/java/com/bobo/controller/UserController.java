@@ -1,18 +1,12 @@
 package com.bobo.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.bobo.beans.UserAndPhoneCode;
-import com.bobo.pojo.User;
 import com.bobo.service.IUserService;
 import com.bobo.utils.ServerResponse;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.apache.catalina.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *与用户相关的一定的接口
@@ -22,7 +16,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     /**
-     * 根据账号密码进行登录
+     *TODO 根据账号密码进行登录
      */
     @Autowired
     IUserService userService;
@@ -32,28 +26,27 @@ public class UserController {
         return serverResponse;
     }
     /**
-     * 发送验证码
+     * TODO 发送验证码
      */
     @GetMapping(value = "send/phonecode.do")
-    public ServerResponse sendPhoneCode(@RequestParam("username") String username,@RequestParam("status") int status,HttpSession httpSession){
-        ServerResponse serverResponse = userService.sendPhoneCode(username,status,httpSession);
+    public ServerResponse sendPhoneCode(HttpServletRequest request, @RequestParam("username") String username, @RequestParam("status") int status){
+        ServerResponse serverResponse = userService.sendPhoneCode(request,username,status);
         return serverResponse;
     }
     /**
-     * 用手机号和验证码进行登录
-     *
+     * TODO 用手机号和验证码进行登录
      */
     @GetMapping(value = "phonecode/login.do")
-    public ServerResponse loginByPhoneCode(@RequestParam("username")String username,@RequestParam("phonecode") String phonecode,HttpSession httpSession){
-        ServerResponse serverResponse = userService.loginByPhoneCode(username,phonecode,httpSession);
+    public ServerResponse loginByPhoneCode(HttpServletRequest request,@RequestParam("username")String username,@RequestParam("phonecode") String phonecode){
+        ServerResponse serverResponse = userService.loginByPhoneCode(request,username,phonecode);
         return serverResponse;
     }
     /**
      * 注册
      */
     @PostMapping(value = "register.do")
-    public ServerResponse register(@RequestBody UserAndPhoneCode userAndPhoneCode){
-        ServerResponse serverResponse = userService.registeredLogic(userAndPhoneCode);
+    public ServerResponse register(HttpServletRequest request,String username,String phonecode,String password,String _password){
+        ServerResponse serverResponse = userService.registeredLogic(request,username,phonecode,password,_password);
         return serverResponse;
     }
 }

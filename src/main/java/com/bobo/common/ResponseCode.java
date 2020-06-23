@@ -8,8 +8,9 @@ public enum ResponseCode {
     USERANME_EXISTS(5,"用户已存在"),
     PHONECODE_NOT_EMPTY(6,"验证码不能为空"),
     PHONECODE_ERROR(7,"验证码错误"),
+    REGISTER_FAIL(8,"注册失败"),
+    REGITTER_INIT_FAIL(9,"用户信息初始化失败"),
     ;
-
     private int code;
         private String msg;
         ResponseCode(int code,String msg){
