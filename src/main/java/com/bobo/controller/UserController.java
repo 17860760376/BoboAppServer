@@ -1,6 +1,4 @@
 package com.bobo.controller;
-
-
 import com.bobo.service.IUserService;
 import com.bobo.utils.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +39,49 @@ public class UserController {
         ServerResponse serverResponse = userService.loginByPhoneCode(request,username,phonecode);
         return serverResponse;
     }
+
+
     /**
      * 注册
      */
     @PostMapping(value = "register.do")
     public ServerResponse register(HttpServletRequest request,String username,String phonecode,String password,String _password){
         ServerResponse serverResponse = userService.registeredLogic(request,username,phonecode,password,_password);
+        return serverResponse;
+    }
+
+    /**
+     * 根据旧密码修改新密码
+     */
+    @GetMapping(value = "update/byoldpsw.do")
+    public ServerResponse updatePswByOldpsw(String username,String oldPassword,String newPassword){
+        ServerResponse serverResponse = userService.updatePswByPsw(username,oldPassword,newPassword);
+        return serverResponse;
+    }
+
+
+    /**
+     * 根据手机验证码修改密码，身份验证接口
+     * @param request
+     * @param username
+     * @param phonecode
+     * @return
+     */
+    @GetMapping(value = "update/byphonecode.do")
+    public ServerResponse updatePswByPhoneCode(HttpServletRequest request,@RequestParam("username")String username,@RequestParam("phonecode") String phonecode){
+        ServerResponse serverResponse = userService.updatePswByPhoneCode(request,username,phonecode);
+        return  serverResponse;
+    }
+
+    /**
+     * 根据手机验证码修改密码，修改密码接口
+     * @param username
+     * @param password
+     * @return
+     */
+    @GetMapping(value = "update/byphonecodefinal.do")
+    public ServerResponse updatePswByPhoneCodeFinal(String username,String password){
+        ServerResponse serverResponse = userService.updatePswByPhoneCodeFinal(username,password);
         return serverResponse;
     }
 }

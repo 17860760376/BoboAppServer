@@ -16,6 +16,8 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+
+
     /**
      * 判断用户名是否存在
      */
@@ -25,4 +27,9 @@ public interface UserMapper {
      *
      */
     User findByUsernameAndPassword(@Param("username") String username,@Param("password")String password);
+    /**
+     * 修改对应用户名的密码
+     */
+    int updatePasswordByUsername(@Param("username") String username,@Param("password") String password);
+
 }

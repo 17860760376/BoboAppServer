@@ -10,6 +10,7 @@ public enum ResponseCode {
     PHONECODE_ERROR(7,"验证码错误"),
     REGISTER_FAIL(8,"注册失败"),
     REGITTER_INIT_FAIL(9,"用户信息初始化失败"),
+    NEW_PASSWORD_NOT_EMPTY(10,"新密码不能为空"),
     ;
     private int code;
         private String msg;

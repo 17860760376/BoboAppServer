@@ -104,6 +104,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
   <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.User" >
     update bobo_user
     set username = #{username,jdbcType=VARCHAR},
@@ -114,14 +117,30 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
   <select id="findByUsername" resultType="int" parameterType="String" >
     select count(*)
     from bobo_user
     where username=#{username}
   </select>
+
+
+
   <select id="findByUsernameAndPassword" resultMap="BaseResultMap" parameterType="map" >
     select id,username,password
     from bobo_user
     where username=#{username} and password=#{password}
   </select>
+
+
+
+  <update id="updatePasswordByUsername" parameterType="map" >
+    update bobo_user
+    set
+      password = #{password,jdbcType=VARCHAR},
+      update_time = now()
+    where username=#{username}
+  </update>
 </mapper>

@@ -14,12 +14,17 @@ create table `bobo_user`(
     unique key `user_name_unique` (`username`) using btree
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 ------------------------
+
+
+
 ------------------用户信息表------------
 create table `bobo_user_information`(
     `id` int not null auto_increment COMMENT '用户id',
     `bobo_number` varchar(50) not null comment '用户对应的唯一的bobo号',
     `bobo_profile_phone` varchar(100) not null comment '用户的头像',
     `bobo_name` varchar(20) not null comment '用户的名字（昵称）',
+
+
     `bobo_introdution` varchar(100)  comment '用户的个人简介',
     `bobo_user_school` varchar(20) not null comment '用户的学校',
     `bobo_gender` int not null comment '用户的性别,0-男，1-女',
@@ -27,22 +32,28 @@ create table `bobo_user_information`(
     `bobo_user_country` varchar(10) not null comment '用户所处国家',
     `bobo_user_province` varchar(10) not null comment '用户所处省份',
     `bobo_user_city` varchar(10) not null comment '用户所处城市',
-    `bobo_user_addreee` varchar(20) comment '用户所处详细地址',
-    `bobo_user_address` varchar(100) not null comment '用户的地区',
+--     `bobo_user_addreee` varchar(20) comment '用户所处详细地址',
+--     `bobo_user_address` varchar(100) comment '用户的地区',
+
+
+
     `bobo_praise_number` int default 0 comment '用户获赞数',
     `bobo_fans_numbers` int default 0 comment '粉丝数',
     `bobo_frients_numbers` int default 0 comment  '好友数',
     `bobo_focuson_numbers` int default 0 comment '关注数',
     `bobo_community` varchar(50) comment '所加入的社团，如果是null就说明没有加入社团',
     `bobo_community_position` int default 0 comment '-0表示没有加入社团，-1表示身份是社团成员，-2表示是副社长，-3表示是社长，不同身份有不同的权限',
+
+
     `create_time` datetime not null COMMENT '创建时间',
     `update_time` datetime not null COMMENT '最后一次更新时间',
-    foreign key(`bobo_number`) references `bobo_user`(`bobo_number`),
-    foreign key(`id`) references `bobo_user`(`id`),
     unique key `bobo_number_unique` (`bobo_number`) using btree,
     unique key `bobo_name` (`bobo_name`) using btree,
     primary key (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+
 ------------------------
 -------------用户关注表----------------
 ---------这里可以进行检索，获得用户的关注，好友，粉丝的对应的列表

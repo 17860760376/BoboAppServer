@@ -49,6 +49,10 @@ public class UserService implements IUserService {
         //step4:返回结果
         return  ServerResponse.createServerResponseBySucess(user);
     }
+
+
+
+
     /**
      * 用账号和验证码进行登录
      * @param username
@@ -62,6 +66,9 @@ public class UserService implements IUserService {
             return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EMPTY.getCode(),ResponseCode.USERNAME_NOT_EMPTY.getMsg());
         if(phonecode==null||phonecode.equals(""))
             return ServerResponse.createServerResponseByFail(ResponseCode.PHONECODE_NOT_EMPTY.getCode(),ResponseCode.PHONECODE_NOT_EMPTY.getMsg());
+
+
+
         //step2:判断用户是否存在
         int count = userMapper.findByUsername(username);
         if(count==0)
@@ -81,6 +88,9 @@ public class UserService implements IUserService {
      * @param status
      * @return
      */
+
+
+    //status的值为0用于登陆、修改密码，1用于注册
     @Override
     public ServerResponse sendPhoneCode(HttpServletRequest request,String username, int status) {
         //step1:手机号的非空校验
@@ -106,6 +116,12 @@ public class UserService implements IUserService {
         return ServerResponse.createServerResponseBySucess();
     }
 
+
+
+
+
+
+
     /**
      * 注册
      * @param username
@@ -126,6 +142,9 @@ public class UserService implements IUserService {
             return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_NOT_EMPTY.getCode(),ResponseCode.PASSWORD_NOT_EMPTY.getMsg());
         if(_password==null||_password.equals(""))
             return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_NOT_EMPTY.getCode(),ResponseCode.PASSWORD_NOT_EMPTY.getMsg());
+
+
+
         //step2:判断用户名是否存在
         int count = userMapper.findByUsername(username);
         if(count!=0)
@@ -146,14 +165,99 @@ public class UserService implements IUserService {
         int result = userMapper.insert(user);
         if(result==0)
             return ServerResponse.createServerResponseByFail(ResponseCode.REGISTER_FAIL.getCode(),ResponseCode.REGISTER_FAIL.getMsg());
+
+
+
         UserInformation userInformation = new UserInformation();
         userInformation.setBoboName(bobo_name);
         userInformation.setBoboNumber(bobo_number);
         int result1 = userInformationMapper.insert(userInformation);
         if(result1==0)
             return ServerResponse.createServerResponseByFail(ResponseCode.REGITTER_INIT_FAIL.getCode(),ResponseCode.REGITTER_INIT_FAIL.getMsg());
-
         return ServerResponse.createServerResponseBySucess();
     }
+
+
+    /**
+     *根据旧密码去修改当前用户密码
+     * @param username
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
+    @Override
+    public ServerResponse updatePswByPsw(String username, String oldPassword, String newPassword) {
+        //step0:判断输入是否合法
+        if(username==null||username.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EMPTY.getCode(),ResponseCode.USERNAME_NOT_EMPTY.getMsg());
+        if(oldPassword==null||oldPassword.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_NOT_EMPTY.getCode(),ResponseCode.PASSWORD_NOT_EMPTY.getMsg());
+        if(newPassword==null||newPassword.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.NEW_PASSWORD_NOT_EMPTY.getCode(),ResponseCode.NEW_PASSWORD_NOT_EMPTY.getMsg());
+        //step1:判断用户名是否存在
+        int count = userMapper.findByUsername(username);
+        if(count==0)
+            return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EXISTS.getCode(),ResponseCode.USERNAME_NOT_EXISTS.getMsg());
+        //step2:判断旧密码是否正确
+        User user = userMapper.findByUsernameAndPassword(username,MD5utils.getPwd(oldPassword));
+        if(user==null)
+            return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_ERROR.getCode(),ResponseCode.PASSWORD_ERROR.getMsg());
+        //step3:修改当前用户名对应的密码
+        userMapper.updatePasswordByUsername(username,MD5utils.getPwd(newPassword));
+        return ServerResponse.createServerResponseBySucess();
+    }
+
+
+
+
+
+    /**
+     * 通过手机验证码修改密码时，身份验证接口
+     * @param request
+     * @param username
+     * @param phonecode
+     * @return
+     */
+    @Override
+    public ServerResponse updatePswByPhoneCode(HttpServletRequest request, String username, String phonecode) {
+        //step1:判断手机号和验证码非空
+        if(username==null||username.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EMPTY.getCode(),ResponseCode.USERNAME_NOT_EMPTY.getMsg());
+        if(phonecode==null||phonecode.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.PHONECODE_NOT_EMPTY.getCode(),ResponseCode.PHONECODE_NOT_EMPTY.getMsg());
+
+
+
+        //step2:判断用户是否存在
+        int count = userMapper.findByUsername(username);
+        if(count==0)
+            return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EXISTS.getCode(),ResponseCode.USERNAME_NOT_EXISTS.getMsg());
+        //step3:判断用户手机号和验证码是否相符
+        String _phonecode= (String)request.getSession().getAttribute(username);
+        if(_phonecode.equals(phonecode)==false)
+            return ServerResponse.createServerResponseByFail(ResponseCode.PHONECODE_ERROR.getCode(),ResponseCode.PHONECODE_ERROR.getMsg());
+        //step4:返回结果
+        request.getSession().removeAttribute(username);
+        return ServerResponse.createServerResponseBySucess();
+    }
+
+
+
+    /**
+     * 修改密码时，身份验证成功后进行修改密码操作
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public ServerResponse updatePswByPhoneCodeFinal(String username, String password) {
+        if(username==null||username.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EMPTY.getCode(),ResponseCode.USERNAME_NOT_EMPTY.getMsg());
+        if(password==null||password.equals(""))
+            return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_NOT_EMPTY.getCode(),ResponseCode.PASSWORD_NOT_EMPTY.getMsg());
+        userMapper.updatePasswordByUsername(username,MD5utils.getPwd(password));
+        return ServerResponse.createServerResponseBySucess();
+    }
+
 
 }

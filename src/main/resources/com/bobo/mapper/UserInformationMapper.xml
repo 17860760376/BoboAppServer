@@ -24,6 +24,9 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+
+
   <sql id="Base_Column_List" >
     id, bobo_number, bobo_profile_phone, bobo_name, bobo_introdution, bobo_user_school, 
     bobo_gender, boob_birthday, bobo_user_country, bobo_user_province, bobo_user_city, 
@@ -58,6 +61,9 @@
       #{boboCommunity,jdbcType=VARCHAR}, #{boboCommunityPosition,jdbcType=INTEGER}, now(),
       now())
   </insert>
+
+
+
   <insert id="insertSelective" parameterType="com.bobo.pojo.UserInformation" >
     insert into bobo_user_information
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -191,6 +197,12 @@
       </if>
     </trim>
   </insert>
+
+
+
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.UserInformation" >
     update bobo_user_information
     <set >
@@ -257,6 +269,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+
+
+
   <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.UserInformation" >
     update bobo_user_information
     set bobo_number = #{boboNumber,jdbcType=VARCHAR},

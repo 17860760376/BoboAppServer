@@ -22,4 +22,22 @@ public interface IUserService {
      * 注册
      */
     ServerResponse registeredLogic(HttpServletRequest request,String username,String phonecode,String password,String _password);
+    /**
+     * 根据旧密码去修改密码
+     */
+    ServerResponse updatePswByPsw(String username,String oldPassword,String newPassword);
+
+    /**
+     * 通过手机验证码修改密码，进行身份验证接口
+     */
+    ServerResponse updatePswByPhoneCode(HttpServletRequest request,String username,String phonecode);
+
+    /**
+     * 通过手机验证码修改密码，身份验证成功后传入要修改的密码进行修改
+     * @param username
+     * @param password
+     * @return
+     */
+    ServerResponse updatePswByPhoneCodeFinal(String username,String password);
 }
+
