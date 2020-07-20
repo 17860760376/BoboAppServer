@@ -19,8 +19,8 @@ public class UserController {
     @Autowired
     IUserService userService;
     @GetMapping(value = "account/login.do")
-    public ServerResponse loginByAccount(@RequestParam("username") String username,@RequestParam("password") String password){
-        ServerResponse serverResponse=userService.loginByAccount(username,password);
+    public ServerResponse loginByAccount(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("password") String password){
+        ServerResponse serverResponse=userService.loginByAccount(request,username,password);
         return serverResponse;
     }
     /**

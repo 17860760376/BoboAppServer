@@ -31,7 +31,7 @@ public class UserService implements IUserService {
      * @return
      */
     @Override
-    public ServerResponse loginByAccount(String username, String password) {
+    public ServerResponse loginByAccount(HttpServletRequest request,String username, String password) {
         //step1:用户名和密码的非空判断
         if(username==null||username.equals(""))
             return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EMPTY.getCode(),ResponseCode.USERNAME_NOT_EMPTY.getMsg());
@@ -47,6 +47,8 @@ public class UserService implements IUserService {
         if(user==null)
             return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_ERROR.getCode(),ResponseCode.PASSWORD_ERROR.getMsg());
         //step4:返回结果
+        User user1 = userMapper.selectUserByUsername(username);
+        request.getSession().setAttribute(user1.getBoboNumber(),user1);
         return  ServerResponse.createServerResponseBySucess(user);
     }
 
@@ -74,11 +76,16 @@ public class UserService implements IUserService {
         if(count==0)
             return ServerResponse.createServerResponseByFail(ResponseCode.USERNAME_NOT_EXISTS.getCode(),ResponseCode.USERNAME_NOT_EXISTS.getMsg());
         //step3:判断用户手机号和验证码是否相符
+
+
         String _phonecode= (String)request.getSession().getAttribute(username);
        if(_phonecode.equals(phonecode)==false)
             return ServerResponse.createServerResponseByFail(ResponseCode.PHONECODE_ERROR.getCode(),ResponseCode.PHONECODE_ERROR.getMsg());
         //step4:返回结果
             request.getSession().removeAttribute(username);
+            User user = userMapper.selectUserByUsername(username);
+            request.setAttribute(user.getBoboNumber(),user);
+//            System.out.println(user);
             return ServerResponse.createServerResponseBySucess();
     }
 

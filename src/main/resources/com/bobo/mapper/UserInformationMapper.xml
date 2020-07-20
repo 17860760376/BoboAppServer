@@ -64,6 +64,8 @@
 
 
 
+
+
   <insert id="insertSelective" parameterType="com.bobo.pojo.UserInformation" >
     insert into bobo_user_information
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -275,6 +277,8 @@
 
 
 
+
+
   <update id="updateByPrimaryKey" parameterType="com.bobo.pojo.UserInformation" >
     update bobo_user_information
     set bobo_number = #{boboNumber,jdbcType=VARCHAR},
@@ -298,5 +302,73 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateInformationByBobo_number" parameterType="com.bobo.pojo.UserInformation" >
+    update bobo_user_information
+    <set >
+      <if test="boboNumber != null" >
+        bobo_number = #{boboNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="boboProfilePhone != null" >
+        bobo_profile_phone = #{boboProfilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="boboName != null" >
+        bobo_name = #{boboName,jdbcType=VARCHAR},
+      </if>
+      <if test="boboIntrodution != null" >
+        bobo_introdution = #{boboIntrodution,jdbcType=VARCHAR},
+      </if>
+      <if test="boboUserSchool != null" >
+        bobo_user_school = #{boboUserSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="boboGender != null" >
+        bobo_gender = #{boboGender,jdbcType=INTEGER},
+      </if>
+      <if test="boobBirthday != null" >
+        boob_birthday = #{boobBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="boboUserCountry != null" >
+        bobo_user_country = #{boboUserCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="boboUserProvince != null" >
+        bobo_user_province = #{boboUserProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="boboUserCity != null" >
+        bobo_user_city = #{boboUserCity,jdbcType=VARCHAR},
+      </if>
+      <if test="boboUserAddreee != null" >
+        bobo_user_addreee = #{boboUserAddreee,jdbcType=VARCHAR},
+      </if>
+      <if test="boboUserAddress != null" >
+        bobo_user_address = #{boboUserAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="boboPraiseNumber != null" >
+        bobo_praise_number = #{boboPraiseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="boboFansNumbers != null" >
+        bobo_fans_numbers = #{boboFansNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="boboFrientsNumbers != null" >
+        bobo_frients_numbers = #{boboFrientsNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="boboFocusonNumbers != null" >
+        bobo_focuson_numbers = #{boboFocusonNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="boboCommunity != null" >
+        bobo_community = #{boboCommunity,jdbcType=VARCHAR},
+      </if>
+      <if test="boboCommunityPosition != null" >
+        bobo_community_position = #{boboCommunityPosition,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = now(),
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -14,4 +14,9 @@ public interface UserInformationMapper {
     int updateByPrimaryKeySelective(UserInformation record);
 
     int updateByPrimaryKey(UserInformation record);
+
+    /**
+     * 根据bobo_number去修改用户信息表
+     */
+    int updateInformationByBobo_number(UserInformation userInformation);
 }

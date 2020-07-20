@@ -17,6 +17,9 @@ create table `bobo_user`(
 
 
 
+-- 用户信息表，关键的内容：
+-- 头像、个人简介、学校、性别、生日、国家、省份、城市、
+-- 获赞数、粉丝数、好友数、关注数、加入的社团、社团中的身份
 ------------------用户信息表------------
 create table `bobo_user_information`(
     `id` int not null auto_increment COMMENT '用户id',
@@ -43,6 +46,8 @@ create table `bobo_user_information`(
     `bobo_focuson_numbers` int default 0 comment '关注数',
     `bobo_community` varchar(50) comment '所加入的社团，如果是null就说明没有加入社团',
     `bobo_community_position` int default 0 comment '-0表示没有加入社团，-1表示身份是社团成员，-2表示是副社长，-3表示是社长，不同身份有不同的权限',
+
+
 
 
     `create_time` datetime not null COMMENT '创建时间',

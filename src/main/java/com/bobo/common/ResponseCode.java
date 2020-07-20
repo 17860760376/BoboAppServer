@@ -11,6 +11,8 @@ public enum ResponseCode {
     REGISTER_FAIL(8,"注册失败"),
     REGITTER_INIT_FAIL(9,"用户信息初始化失败"),
     NEW_PASSWORD_NOT_EMPTY(10,"新密码不能为空"),
+    NEED_LOGIN(11,"未登陆"),
+    UPDATE_INFORMATION_FAIL(12,"修改用户信息失败")
     ;
     private int code;
         private String msg;

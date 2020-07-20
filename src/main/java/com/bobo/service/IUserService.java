@@ -13,7 +13,7 @@ public interface IUserService {
     /**
      * 用账号（手机号）和密码登陆
      */
-    ServerResponse loginByAccount(String username, String password);
+    ServerResponse loginByAccount(HttpServletRequest request,String username, String password);
     /**
      * 用手机验证码登陆
      */
@@ -39,5 +39,6 @@ public interface IUserService {
      * @return
      */
     ServerResponse updatePswByPhoneCodeFinal(String username,String password);
+
 }
 

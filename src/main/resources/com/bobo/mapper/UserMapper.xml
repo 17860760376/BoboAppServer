@@ -13,12 +13,16 @@
   <sql id="Base_Column_List" >
     id, username, bobo_number, password, role, create_time, update_time
   </sql>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from bobo_user
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from bobo_user
     where id = #{id,jdbcType=INTEGER}
@@ -143,4 +147,10 @@
       update_time = now()
     where username=#{username}
   </update>
+
+  <select id="selectUserByUsername" resultMap="BaseResultMap" parameterType="String" >
+    select id,username,password
+    from bobo_user
+    where username = #{username}
+  </select>
 </mapper>

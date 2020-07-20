@@ -32,4 +32,11 @@ public interface UserMapper {
      */
     int updatePasswordByUsername(@Param("username") String username,@Param("password") String password);
 
+
+
+
+    /**
+     *登陆时，根据用户的用户名来去获取用户信息存入session中
+     */
+    User selectUserByUsername(@Param("username") String username);
 }
