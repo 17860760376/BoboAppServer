@@ -40,5 +40,10 @@ public interface IUserService {
      */
     ServerResponse updatePswByPhoneCodeFinal(String username,String password);
 
+    /**
+     * 根据bobo_number来退出当前用户的登陆状态
+     *
+     */
+    ServerResponse exitUserLogic(String boboNumber,HttpServletRequest request);
 }
 

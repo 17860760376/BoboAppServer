@@ -22,6 +22,7 @@
     publish_time, create_time, update_time, dynamicment_pariser_number, dynamic_comment_number, 
     dynamic_tranmit_number
   </sql>
+
   <sql id="Blob_Column_List" >
     dynamicment_content
   </sql>
@@ -33,22 +34,29 @@
     from bobo_dynamicment
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from bobo_dynamicment
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bobo.pojo.Dynamicment" >
+
+
+  <insert id="insert" parameterType="com.bobo.pojo.Dynamicment" useGeneratedKeys="true" keyProperty="id" >
     insert into bobo_dynamicment (id, publisher_bobo_number, dynamicment_category, 
       publisher_port, publisher_name, publish_time, 
       create_time, update_time, dynamicment_pariser_number, 
       dynamic_comment_number, dynamic_tranmit_number, 
       dynamicment_content)
     values (#{id,jdbcType=INTEGER}, #{publisherBoboNumber,jdbcType=VARCHAR}, #{dynamicmentCategory,jdbcType=VARCHAR}, 
-      #{publisherPort,jdbcType=VARCHAR}, #{publisherName,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{dynamicmentPariserNumber,jdbcType=INTEGER}, 
+      #{publisherPort,jdbcType=VARCHAR}, #{publisherName,jdbcType=VARCHAR}, now(),
+      now(), now(), #{dynamicmentPariserNumber,jdbcType=INTEGER},
       #{dynamicCommentNumber,jdbcType=INTEGER}, #{dynamicTranmitNumber,jdbcType=INTEGER}, 
       #{dynamicmentContent,jdbcType=LONGVARCHAR})
   </insert>
+
+
+
   <insert id="insertSelective" parameterType="com.bobo.pojo.Dynamicment" >
     insert into bobo_dynamicment
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -128,6 +136,9 @@
       </if>
     </trim>
   </insert>
+
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.Dynamicment" >
     update bobo_dynamicment
     <set >
@@ -167,6 +178,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bobo.pojo.Dynamicment" >
     update bobo_dynamicment
     set publisher_bobo_number = #{publisherBoboNumber,jdbcType=VARCHAR},

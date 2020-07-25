@@ -84,4 +84,16 @@ public class UserController {
         ServerResponse serverResponse = userService.updatePswByPhoneCodeFinal(username,password);
         return serverResponse;
     }
+
+    /**
+     * 根据boboNumber来退出当前登陆状态
+     * @param boboNumber
+     * @param request
+     * @return
+     */
+    @GetMapping(value = "exit.do")
+    public ServerResponse exitUserLogic(@RequestParam("boboNumber") String boboNumber,HttpServletRequest request){
+        ServerResponse serverResponse = userService.exitUserLogic(boboNumber,request);
+        return  serverResponse;
+    }
 }

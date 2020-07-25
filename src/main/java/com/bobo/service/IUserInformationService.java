@@ -14,4 +14,6 @@ public interface IUserInformationService {
      * @return
      */
     ServerResponse updateUserInformationByBobo_number(HttpServletRequest request,UserInformation userInformation);
+
+
 }

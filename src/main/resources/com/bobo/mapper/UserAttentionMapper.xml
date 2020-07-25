@@ -20,6 +20,8 @@
     from bobo_user_attention
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from bobo_user_attention
     where id = #{id,jdbcType=INTEGER}
@@ -115,4 +117,59 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+
+  <select id="findByAbobo_numberAndBbobo_number" resultType="int" parameterType="map" >
+    select count(*)
+    from bobo_user_attention
+    where follow_bobo_number = #{befollowBoboNumber,jdbcType=VARCHAR} and befollow_bobo_number = #{followBoboNumber,jdbcType=VARCHAR}
+    and  relationship = 0
+  </select>
+
+
+  <update id="updateFocusonToFriends" parameterType="map" >
+    update bobo_user_attention
+    set
+      relationship = 1,
+      focus_on_time = now(),
+      update_time = now()
+    where follow_bobo_number = #{befollowBoboNumber,jdbcType=VARCHAR} and befollow_bobo_number = #{followBoboNumber,jdbcType=VARCHAR}
+    and  relationship = 0
+  </update>
+
+
+
+  <insert id="insertAFocusonB" parameterType="map" >
+    insert into bobo_user_attention
+    (follow_bobo_number, befollow_bobo_number,
+      relationship, focus_on_time, create_time,
+      update_time)
+    values ( #{followBoboNumber,jdbcType=VARCHAR}, #{befollowBoboNumber,jdbcType=VARCHAR},
+      0, now(), now(), now())
+  </insert>
+
+  <delete id="deleteByCancelAUserFocusonBUser" parameterType="map" >
+    delete from bobo_user_attention
+    where (follow_bobo_number=#{followBoboNumber} and befollow_bobo_number=#{befollowBoboNumber}) or
+    (follow_bobo_number=#{befollowBoboNumber} and befollow_bobo_number=#{followBoboNumber})
+  </delete>
+
+
+  <select id="findIfBUserFocusonAUser" resultType="int" parameterType="map" >
+    select count(*)
+    from bobo_user_attention
+    where (follow_bobo_number = #{befollowBoboNumber,jdbcType=VARCHAR} and befollow_bobo_number = #{followBoboNumber,jdbcType=VARCHAR}
+    and  relationship = 1) or
+    (follow_bobo_number = #{followBoboNumber,jdbcType=VARCHAR} and befollow_bobo_number = #{befollowBoboNumber,jdbcType=VARCHAR}
+    and  relationship = 1)
+  </select>
+
+
+  <select id="findIfBUserFocusonAUser" resultMap="BaseResultMap"  >
+    select follow_bobo_number,befollow_bobo_number
+    from bobo_user_attention
+    where (follow_bobo_number = #{followBoboNumber}) OR (befollow_bobo_number = #{followBoboNumber} AND relationship = 1)
+  </select>
 </mapper>

@@ -11,6 +11,8 @@ spring:
       min-idle: 1
       test-on-borrow: true
       test-on-return: true
+  thymeleaf:
+    mode: HTML5
 mybatis:
   mapper-locations: classpath*:com/bobo/mapper/*Mapper.xml
   configuration:
@@ -18,3 +20,6 @@ mybatis:
 logging:
   level:
     com.bobo.mapper: debug
+
+business:
+  host: http://img.bobo.com/

@@ -29,7 +29,11 @@ public class UserInformation {
 
     private String boboUserAddress;
 
+
+
     private Integer boboPraiseNumber;
+
+
 
     private Integer boboFansNumbers;
 
@@ -37,7 +41,12 @@ public class UserInformation {
 
     private Integer boboFocusonNumbers;
 
+
+
+
     private String boboCommunity;
+
+
 
     private Integer boboCommunityPosition;
 

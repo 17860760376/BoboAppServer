@@ -84,6 +84,8 @@
       </if>
     </trim>
   </insert>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.bobo.pojo.User" >
     update bobo_user
     <set >
@@ -149,7 +151,7 @@
   </update>
 
   <select id="selectUserByUsername" resultMap="BaseResultMap" parameterType="String" >
-    select id,username,password
+    select id,bobo_number,username,password
     from bobo_user
     where username = #{username}
   </select>

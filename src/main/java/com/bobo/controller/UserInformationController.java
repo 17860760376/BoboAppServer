@@ -21,6 +21,7 @@ public class UserInformationController {
     @Autowired
     IUserInformationService userInformationService;
 
+    //这里需要加上params,与前端进行对应，测试时可以不加，方便测试
     @PostMapping(value = "updateinformation.do")
     public ServerResponse updateUserInformationByBobo_number(UserInformation userInformation, HttpServletRequest request) {
         ServerResponse serverResponse = userInformationService.updateUserInformationByBobo_number(request,userInformation);

@@ -44,7 +44,13 @@ create table `bobo_user_information`(
     `bobo_fans_numbers` int default 0 comment '粉丝数',
     `bobo_frients_numbers` int default 0 comment  '好友数',
     `bobo_focuson_numbers` int default 0 comment '关注数',
+
+
+
     `bobo_community` varchar(50) comment '所加入的社团，如果是null就说明没有加入社团',
+
+
+
     `bobo_community_position` int default 0 comment '-0表示没有加入社团，-1表示身份是社团成员，-2表示是副社长，-3表示是社长，不同身份有不同的权限',
 
 
@@ -56,6 +62,11 @@ create table `bobo_user_information`(
     unique key `bobo_name` (`bobo_name`) using btree,
     primary key (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+
+
+
 
 
 
@@ -81,12 +92,14 @@ create table `bobo_user_attention`(
 
 
 
+
+
 -----------------------------------
 ----------------动态类别表------------------即类别
 create table `bobo_category` (
     `id` int not null auto_increment comment '种类id',
     `parent_id` int not null comment '父类的id,当parent_id=0时，表示时一级类别',
-    `label_value` int default 0 not null comment '种类的热度',
+--     `label_value` int default 0 not null comment '种类的热度',
     `name` varchar(50) default null comment '种类名称',
     `status` int default 1 comment '类别状态1-正常，2-已废弃',
     `create_time` datetime not null COMMENT '创建时间',
@@ -94,6 +107,16 @@ create table `bobo_category` (
     primary key (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 --------------------------------------
+
+
+
+
+
+
+
+
+
+
 --------------用户发布的动态表，通过用户的bobo号来进行CRUL----------------
 create table `bobo_dynamicment`(
     `id` int not null auto_increment comment '发布的动态id',
@@ -107,12 +130,19 @@ create table `bobo_dynamicment`(
     `update_time` datetime not null COMMENT '最后一次更新时间',
     `dynamicment_pariser_number` int default 0 not null comment '动态获赞数',
     `dynamic_comment_number` int default 0 not null comment '动态评论数',
-    `dynamic_tranmit_number` int default 0 not null comment '动态转发数',
+     `dynamic_tranmit_number` int default 0 not null comment '动态转发数',
     foreign key(`publisher_bobo_number`) references `bobo_user`(`bobo_number`),
     foreign key(`publisher_name`) references `bobo_user_information`(`bobo_name`),
     primary key (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 ---------------------------------------
+
+
+
+
+
+
+
 ---------------动态的图片表，通过动态的id进行CRUL,这里存储的也是图片的存储路径-------------
 create table `bobo_dynamicment_picture`(
     `id` int not null auto_increment comment '发布动态的图片id',
@@ -124,6 +154,11 @@ create table `bobo_dynamicment_picture`(
     primary key (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 ------------------------------------
+
+
+
+
+
 ---------------动态评论表-------------------
 create table `bobo_comments`(
     `id` int not null auto_increment comment '发布的评论的id',
@@ -138,6 +173,9 @@ create table `bobo_comments`(
     foreign key(`comment_publisher_name`) references `bobo_user_information`(`bobo_name`),
     primary key (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+
 
 
 

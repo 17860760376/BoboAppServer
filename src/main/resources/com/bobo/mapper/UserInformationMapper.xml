@@ -371,4 +371,105 @@
     </set>
     where bobo_number = #{boboNumber,jdbcType=INTEGER}
   </update>
+
+
+
+
+
+
+
+
+
+
+
+
+  <update id="updateFriendAddAndFanAdd" parameterType="string" >
+    update bobo_user_information
+    set
+      bobo_frients_numbers = bobo_frients_numbers+1,
+      bobo_fans_numbers = bobo_fans_numbers+1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateFansAdd" parameterType="string" >
+    update bobo_user_information
+    set
+      bobo_fans_numbers = bobo_fans_numbers+1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateFocusonUserAdd" parameterType="string" >
+    update bobo_user_information
+    set
+      bobo_focuson_numbers = bobo_focuson_numbers+1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateFocusonAddAndFriendAdd" parameterType="string" >
+    update bobo_user_information
+    set
+      bobo_frients_numbers = bobo_frients_numbers+1,
+      bobo_focuson_numbers = bobo_focuson_numbers+1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+  <update id="updateFocusonReduceAndFriendReduce" parameterType="string" >
+    update bobo_user_information
+    set
+      bobo_frients_numbers = bobo_frients_numbers-1,
+       bobo_focuson_numbers = bobo_focuson_numbers-1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <update id="updateFriendReduceFanReduce" parameterType="string" >
+    update bobo_user_information
+    set
+      bobo_frients_numbers = bobo_frients_numbers-1,
+      bobo_fans_numbers = bobo_fans_numbers-1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <update id="updateFocusonUserReduce" parameterType="string" >
+    update bobo_user_information
+    set
+       bobo_focuson_numbers = bobo_focuson_numbers-1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateFansReduce" parameterType="string" >
+    update bobo_user_information
+    set
+     bobo_fans_numbers = bobo_fans_numbers-1
+    where bobo_number = #{boboNumber,jdbcType=INTEGER}
+  </update>
+
+
+
+  <select id="findBybobo_number" resultMap="BaseResultMap" parameterType="string" >
+    select bobo_profile_phone,bobo_name
+    from bobo_user_information
+    where bobo_number = #{boboNumber}
+  </select>
+
 </mapper>

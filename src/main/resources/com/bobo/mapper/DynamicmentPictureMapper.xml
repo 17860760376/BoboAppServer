@@ -21,12 +21,18 @@
     delete from bobo_dynamicment_picture
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+
+
   <insert id="insert" parameterType="com.bobo.pojo.DynamicmentPicture" >
     insert into bobo_dynamicment_picture (id, dynamicment_id, picture, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{dynamicmentId,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
+
+
+
   <insert id="insertSelective" parameterType="com.bobo.pojo.DynamicmentPicture" >
     insert into bobo_dynamicment_picture
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -90,4 +96,10 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <delete id="deleteBydynamicmentId" parameterType="java.lang.Integer" >
+    delete from bobo_dynamicment_picture
+    where dynamicment_id = #{dynamicmentId,jdbcType=INTEGER}
+  </delete>
 </mapper>

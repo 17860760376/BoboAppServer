@@ -25,6 +25,7 @@ public class UserService implements IUserService {
     UserInformationMapper userInformationMapper;
 
     /**
+     * 账号默认存储时间是30min
      * 用账号和密码登录
      * @param username
      * @param password
@@ -49,6 +50,7 @@ public class UserService implements IUserService {
         //step4:返回结果
         User user1 = userMapper.selectUserByUsername(username);
         request.getSession().setAttribute(user1.getBoboNumber(),user1);
+//        System.out.println(request.getSession().getMaxInactiveInterval());
         return  ServerResponse.createServerResponseBySucess(user);
     }
 
@@ -95,8 +97,6 @@ public class UserService implements IUserService {
      * @param status
      * @return
      */
-
-
     //status的值为0用于登陆、修改密码，1用于注册
     @Override
     public ServerResponse sendPhoneCode(HttpServletRequest request,String username, int status) {
@@ -178,6 +178,11 @@ public class UserService implements IUserService {
         UserInformation userInformation = new UserInformation();
         userInformation.setBoboName(bobo_name);
         userInformation.setBoboNumber(bobo_number);
+        userInformation.setBoboFansNumbers(0);
+        userInformation.setBoboFocusonNumbers(0);
+        userInformation.setBoboFrientsNumbers(0);
+        userInformation.setBoboPraiseNumber(0);
+        userInformation.setBoboCommunityPosition(0);
         int result1 = userInformationMapper.insert(userInformation);
         if(result1==0)
             return ServerResponse.createServerResponseByFail(ResponseCode.REGITTER_INIT_FAIL.getCode(),ResponseCode.REGITTER_INIT_FAIL.getMsg());
@@ -263,6 +268,21 @@ public class UserService implements IUserService {
         if(password==null||password.equals(""))
             return ServerResponse.createServerResponseByFail(ResponseCode.PASSWORD_NOT_EMPTY.getCode(),ResponseCode.PASSWORD_NOT_EMPTY.getMsg());
         userMapper.updatePasswordByUsername(username,MD5utils.getPwd(password));
+        return ServerResponse.createServerResponseBySucess();
+    }
+
+    /**
+     * 根据boboNumber，来退出当前登陆的状态
+     * @param boboNumber
+     * @param request
+     * @return
+     */
+    @Override
+    public ServerResponse exitUserLogic(String boboNumber, HttpServletRequest request) {
+        User user = (User)request.getSession().getAttribute(boboNumber);
+        if(user==null)
+            return ServerResponse.createServerResponseByFail(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getMsg());
+        request.getSession().removeAttribute(boboNumber);
         return ServerResponse.createServerResponseBySucess();
     }
 

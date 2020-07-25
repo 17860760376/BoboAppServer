@@ -114,4 +114,12 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findSubCategoryById" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from bobo_category
+    where parent_id=#{categoryId}
+  </select>
+
 </mapper>
